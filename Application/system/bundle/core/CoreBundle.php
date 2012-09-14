@@ -4,115 +4,57 @@ namespace bundle\core;
 
 use \bundle\core\models;
 
-class CoreBundle extends \library\Bundle {
+class CoreBundle extends library\Bundle {
     
-    public function createContentElement(models\Content $content)
+    public function __construct()
     {
-        $contentType = $this->getKernel()->getContentType($content->getType());
-        $elementClass = $contentType->getElementClass();
-        $element = new $elementClass($this->getKernel(), $content);
-        $element->setTheme($this->getTheme());
-        $element->setHtmlTemplateFormat($this->getHtmlTemplateFormat());
-        if ($element->equalBundle($this->bundle))
-        {
-            $element->setTemplating($this->getTemplating());
-        }
-        return $element;
+        $this->contentTypes = array(
+            'Root' => new ContentType(array(
+                'elementClass' => '\\bundle\\core\\elements\\ContentRoot',
+                'widgetClass' => '\\bundle\\core\\elements\\ContentRootWidget')),
+            'Text' => new ContentType(array(
+                'elementClass' => '\\bundle\\core\\elements\\ContentText',
+                'widgetClass' => '\\bundle\\core\\elements\\ContentTextWidget')),
+            'Headline' => new ContentType(array(
+                'elementClass' => '\\bundle\\core\\elements\\ContentHeadline',
+                'widgetClass' => '\\bundle\\core\\elements\\ContentHeadlineWidget')),
+            'Image' => new ContentType(array(
+                'elementClass' => '\\bundle\\core\\elements\\ContentImage',
+                'widgetClass' => '\\bundle\\core\\elements\\ContentImageWidget')),
+            'Link' => new ContentType(array(
+                'elementClass' => '\\bundle\\core\\elements\\ContentLink',
+                'widgetClass' => '\\bundle\\core\\elements\\ContentLinkWidget')),
+            'Gallery' => new ContentType(array(
+                'elementClass' => '\\bundle\\core\\elements\\ContentGallery',
+                'widgetClass' => '\\bundle\\core\\elements\\ContentGalleryWidget')),
+            'Custom' => new ContentType(array(
+                'elementClass' => '\\bundle\\core\\elements\\ContentCustom',
+                'widgetClass' => '\\bundle\\core\\elements\\ContentCustomWidget')));
+        $this->panelTypes = array(
+            'ArticleFull' => new PanelType(array(
+                'panelClass' => '\\bundle\\core\\controller\\ArticleFull',
+                'valueClass' => '\\bundle\\core\\models\\Article')),
+            'ArticleShortItem' => new PanelType(array(
+                'panelClass' => '\\bundle\\core\\controller\\ArticleShortItem',
+                'valueClass' => '\\bundle\\core\\models\\Article')),
+            'ArticleTeaserItem' => new PanelType(array(
+                'panelClass' => '\\bundle\\core\\controller\\ArticleTeaserItem',
+                'valueClass' => '\\bundle\\core\\models\\Article')),
+            'ArticleShortList' => new PanelType(array(
+                'panelClass' => '\\bundle\\core\\controller\\ArticleShortList',
+                'valueClass' => '\\bundle\\core\\models\\NodeArticle')),
+            'ArticleTeaserList' => new PanelType(array(
+                'panelClass' => '\\bundle\\core\\controller\\ArticleTeaserList',
+                'valueClass' => '\\bundle\\core\\models\\NodeArticle')));
+        $this->widgetTypes = array(
+            'Article' => new WidgetType(array(
+                'widgetClass' => '\\bundle\\core\\controller\\ArticleWidget',
+                'valueClass' => '\\bundle\\core\\models\\Article')),
+            'Taxonomy' => new WidgetType(array(
+                'widgetClass' => '\\bundle\\core\\controller\\TaxonomyWidget',
+                'valueClass' => '\\bundle\\core\\models\\Taxonomy')),
+            'Page' => new WidgetType(array(
+                'widgetClass' => '\\bundle\\core\\controller\\PageWidget',
+                'valueClass' => '\\bundle\\core\\models\\Page')));
     }
-
-    public function createContentWidget(models\Content $content)
-    {
-        $contentType = $this->getKernel()->getContentType($content->getType());
-        $widgetClass = $contentType->getWidgetClass();
-        $widget = new $widgetClass($this->getKernel(), $content);
-        $widget->setTheme($this->getTheme());
-        $widget->setHtmlTemplateFormat($this->getHtmlTemplateFormat());
-        if ($widget->equalBundle($this->bundle))
-        {
-            $widget->setTemplating($this->getTemplating());
-        }
-        return $widget;
-    }
-
-    public function getModelRepository($modelName)
-    {
-        return $this->getKernel()->getBundleModelRepository($this->bundle, $modelName);
-    }
-
-    public function createModelPanel($panelTypeName, $model, $options=array())
-    {
-        $panelType = $this->getKernel()->getPanelType($panelTypeName);
-        $panelClass = $panelType->getPanelClass();
-        $panelValueClass = $panelType->getValueClass();
-        if (!($model instanceof $panelValueClass))
-        {
-            $error = sprintf('Object type not an instance of class: <%s>', $panelValueClass);
-            throw new \Exception($error);
-        }
-        $panel = new $panelClass($this->getKernel(), $model, $options);
-        $panel->setTheme($this->getTheme());
-        $panel->setHtmlTemplateFormat($this->getHtmlTemplateFormat());
-        if ($panel->equalBundle($this->bundle))
-        {
-            $panel->setTemplating($this->getTemplating());
-        }
-        return $panel;
-    }
-
-    public function createModelWidget($widgetTypeName, $model, $options=array())
-    {
-        $widgetType = $this->getKernel()->getWidgetType($widgetTypeName);
-        $widgetClass = $widgetType->getWidgetClass();
-        $widgetValueClass = $widgetType->getValueClass();
-        if (!($model instanceof $widgetValueClass))
-        {
-            $error = sprintf('Object type not an instance of class: <%s>', $widgetValueClass);
-            throw new \Exception($error);
-        }
-        $widget = new $widgetClass($this->getKernel(), $model, $options);
-        $widget->setTheme($this->getTheme());
-        $widget->setHtmlTemplateFormat($this->getHtmlTemplateFormat());
-        if ($widget->equalBundle($this->bundle))
-        {
-            $widget->setTemplating($this->getTemplating());
-        }
-        return $widget;
-    }
-
-    public function createPanel($panelClass, $options=array())
-    {
-        $panel = new $panelClass($this->getKernel(), $options);
-        $panel->setTheme($this->getTheme());
-        $panel->setHtmlTemplateFormat($this->getHtmlTemplateFormat());
-        if ($panel->equalBundle($this->bundle))
-        {
-            $panel->setTemplating($this->getTemplating());
-        }
-        return $panel;
-    }
-
-    public function createWidget($widgetTypeName, $options=array())
-    {
-        $widgetType = $this->getKernel()->getWidgetType($widgetTypeName);
-        $widgetClass = $widgetType->getWidgetClass();
-        $widget = new $widgetClass($this->getKernel(), $options);
-        $widget->setTheme($this->getTheme());
-        $widget->setHtmlTemplateFormat($this->getHtmlTemplateFormat());
-        if ($widget->equalBundle($this->bundle))
-        {
-            $widget->setTemplating($this->getTemplating());
-        }
-        return $widget;
-    }
-
-    public function render($templateName, array $context)
-    {
-        return $this->loadTemplate($templateName)->render($context);;
-    }
-    
-    public function renderPartial($templateName, array $context)
-    {
-        return $this->loadTemplate($templateName)->render($context);
-    }
-    
 }

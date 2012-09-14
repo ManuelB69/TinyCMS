@@ -2,7 +2,7 @@
 
 namespace bundle\core\library;
 
-use \library\Kernel;
+use \library\Bundle;
 
 abstract class FormWidget extends Widget implements FormWidgetInterface {
 
@@ -11,9 +11,9 @@ abstract class FormWidget extends Widget implements FormWidgetInterface {
     protected $errorTemplate;
     protected $errors;
     
-    public function __construct(Kernel $kernel, $value, $options=array())
+    public function __construct($value)
     {
-        parent::__construct($kernel, $value, $options);
+        parent::__construct($value);
         $this->errors = array();
     }
     

@@ -2,7 +2,7 @@
 
 namespace bundle\core\library;
 
-abstract class Panel extends Bundle implements PanelInterface {
+abstract class Panel extends Controller implements PanelInterface {
 
     public function compileHtmlAttribute($attribute, $value)
     {

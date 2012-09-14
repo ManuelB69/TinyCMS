@@ -2,16 +2,14 @@
 
 namespace bundle\core\library;
 
-use \library\Kernel;
 use \bundle\core\models\Content;
 
 class ContentElement extends Panel {
 
     protected $content;
     
-    public function __construct(Kernel $kernel, Content $content, $options=array())
+    public function __construct(Content $content)
     {
-        parent::__construct($kernel, $options);
         $this->content = $content;
     }
     

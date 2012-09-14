@@ -1,127 +1,141 @@
 <?php
 
-namespace bundle\core\library;
+namespace library;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\Request;
 
 abstract class Controller extends ContainerAware implements ControllerInterface {
     
-    protected $options;
     protected $bundle;
-    protected $theme;
-    protected $templating;
-    protected $htmlTemplateFormat;
-    protected $htmlHeader;
+    protected $parent;
     
-    public function __construct($bundle, $options=array()) 
+    public function setParent(Parent $parent)
     {
-        $this->options = array_merge(array(
-                'lang' => 'en'), $options);
+        $this->parent = $parent;
+    }
+    
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    public function setBundle(Bundle $bundle)
+    {
         $this->bundle = $bundle;
-        $this->theme = null;
-        $this->htmlTemplateFormat = 'html';
-        $this->htmlHeader = null;
-        $this->templating = null;
     }
     
     public function getBundle()
     {
-        return $this->container->get('kernel')->getBundle($this->bundle, true);
+        $bundle = $this->bundle;
+        if (null === $bundle)
+        {
+            $parent = $this->getParent();
+            if (null !== $parent)
+            {
+                $bundle = $parent->getBundle();
+            }
+            if (null === $bundle)
+            {
+                $error = sprintf('No Bundle associated with this Controller');
+                throw new \Exception($error);
+            }
+        }
+        return $bundle;
     }
 
-    public function equalBundle($bundle)
+    public function createContentElement(models\Content $content)
     {
-        return ($this->bundle === $bundle);
-    }
-    
-    public function generateUrl($route, $parameters=array(), $absolute=false)
-    {
-        return $this->container->get('router')->generate($route, $parameters, $absolute);
-    }
-    
-    public function forward($controller, array $path = array(), array $query = array())
-    {
-        return $this->container->get('http_kernel')->forward($controller, $path, $query);
-    }
-    
-    public function redirect($url, $status = 302)
-    {
-        return new RedirectResponse($url, $status);
-    }
-    
-    public function getTemplateLoader()
-    {
-        $paths = array();
-        $kernel = $this->getKernel();
-        if (!$this->equalBundle($kernel->getAppBundle()))
-        {
-            $path = $kernel->getBundlePrimaryTemplatePath($this->bundle, $this->theme);
-            if (file_exists($path)) $paths[] = $path;
-        }
-        $path = $kernel->getBundlePath($this->bundle, 'templates');
-        if (file_exists($path)) $paths[] = $path;
-        if (!$this->equalBundle('core'))
-        {
-            $path = $kernel->getBundlePrimaryTemplatePath('core', $this->theme);
-            if (file_exists($path)) $paths[] = $path;
-            $paths[] = $kernel->getCoreBundlePath('templates');
-        }
-        return new \Twig_Loader_Filesystem($paths);
+        $bundle = $this->getBundle();
+        $contentType = $bundle->getContentType($content->getType());
+        $elementClass = $contentType->getElementClass();
+        $element = new $elementClass($content);
+        $element->setParent($this);
+        return $element;
     }
 
-    public function createTemplating()
+    public function createContentWidget(models\Content $content)
     {
-        return new \Twig_Environment($this->getTemplateLoader());
+        $bundle = $this->getBundle();
+        $contentType = $bundle->getContentType($content->getType());
+        $widgetClass = $contentType->getWidgetClass();
+        $widget = new $widgetClass($content);
+        $widget->setParent($this);
+        return $widget;
     }
     
-    public function setTemplating($templating)
+    public function createModelPanel($panelTypeName, $model)
     {
-        $this->templating = $templating;
-    }
-    
-    public function getTemplating()
-    {
-        if (null === $this->templating)
+        $bundle = $this->getBundle();
+        $panelType = $bundle->getPanelType($panelTypeName);
+        $panelClass = $panelType->getPanelClass();
+        $panelValueClass = $panelType->getValueClass();
+        if (!($model instanceof $panelValueClass))
         {
-            $this->templating = $this->createTemplating();
+            $error = sprintf('Object type not an instance of class: <%s>', $panelValueClass);
+            throw new \Exception($error);
         }
-        return $this->templating;
-    }
-    
-    public function loadTemplate($templateName)
-    {
-        $templateFullName = sprintf('%s.%s.twig', $templateName, $this->htmlTemplateFormat);
-        return $this->getTemplating()->loadTemplate($templateFullName);
-    }
-    
-    public function setTheme($theme)
-    {
-        $this->theme = $theme;
-    }
-    
-    public function getTheme()
-    {
-        return $this->theme;
+        $panel = new $panelClass($model);
+        $panel->setParent($this);
+        return $panel;
     }
 
-    public function setHtmlTemplateFormat($format)
+    public function createModelWidget($widgetTypeName, $model)
     {
-        $this->htmlTemplateFormat = $format;
+        $bundle = $this->getBundle();
+        $widgetType = $bundle->getWidgetType($widgetTypeName);
+        $widgetClass = $widgetType->getWidgetClass();
+        $widgetValueClass = $widgetType->getValueClass();
+        if (!($model instanceof $widgetValueClass))
+        {
+            $error = sprintf('Object type not an instance of class: <%s>', $widgetValueClass);
+            throw new \Exception($error);
+        }
+        $widget = new $widgetClass($model);
+        $widget->setParent($this);
+        return $widget;
     }
-    
-    public function getHtmlTemplateFormat()
+
+    public function createPanel($panelClass)
     {
-        return $this->htmlTemplateFormat;
+        $panel = new $panelClass();
+        $panel->setParent($this);
+        return $panel;
+    }
+
+    public function createWidget($widgetTypeName, $value)
+    {
+        $bundle = $this->getBundle();
+        $widgetType = $bundle->getWidgetType($widgetTypeName);
+        $widgetClass = $widgetType->getWidgetClass();
+        $widget = new $widgetClass($value);
+        $widget->setParent($this);
+        return $widget;
     }
 
     public function getHtmlHeader()
     {
-        if (null == $this->htmlHeader)
+        $parent = $this->getParent();
+        if (null !== $parent)
         {
-            $this->htmlHeader = new HtmlHeader();
+            return $parent->getHtmlHeader();
         }
-        return $this->htmlHeader;
+        return null;
+    }
+
+    public function loadTemplate($templateName)
+    {
+        $parent = $this->getParent();
+        if (null !== $parent)
+        {
+            return $parent->loadTemplate($templateName);
+        }
+        return null;
+    }
+
+    public function renderTemplate($templateName, array $context)
+    {
+        return $this->loadTemplate($templateName)->render($context);
     }
 }
 

@@ -11,7 +11,7 @@ abstract class ContentWidget extends Widget implements ModelWidgetInterface {
     
     public function persist()
     {
-        $em = $this->getKernel()->getEntityManager();
+        $em = $this->container->get('doctrine.em');
         $em->persist($this->getValue());
     }
 }

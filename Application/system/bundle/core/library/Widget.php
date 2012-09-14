@@ -2,24 +2,21 @@
 
 namespace bundle\core\library;
 
-use \library\Kernel;
-
-abstract class Widget extends Bundle implements WidgetInterface {
+abstract class Widget extends Controller implements WidgetInterface {
 
     protected $id;
     protected $label;
     protected $cssClass;
     protected $value;
     
-    public function __construct(Kernel $kernel, $value, $options=array())
+    public function __construct($value)
     {
-        parent::__construct($kernel, $options);
         $this->validate($value);
     }
     
-    public function setId($value)
+    public function setId($id)
     {
-        $this->id = $value;
+        $this->id = $id;
     }
     
     public function getId()
@@ -27,9 +24,9 @@ abstract class Widget extends Bundle implements WidgetInterface {
         return $this->id;
     }
     
-    public function setLabel($value)
+    public function setLabel($label)
     {
-        $this->label = $value;
+        $this->label = $label;
     }
     
     public function getLabel()
@@ -37,9 +34,9 @@ abstract class Widget extends Bundle implements WidgetInterface {
         return $this->label;
     }
     
-    public function setCssClass($value)
+    public function setCssClass($cssClass)
     {
-        $this->cssClass = $value;
+        $this->cssClass = $cssClass;
     }
     
     public function getCssClass()
