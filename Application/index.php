@@ -103,9 +103,9 @@ use bundles\core\models;
 $kernel = $index->getKernel();
 $em = $kernel->getEntityManager();
 $articleRepository = $kernel->getBundleModelRepository('core', 'Article');
-$nodeArticleRepository = $kernel->getBundleModelRepository('core', 'NodeArticle');
-$contentRepository = $kernel->getBundleModelRepository('core', 'Content');
-$tagRepository = $kernel->getBundleModelRepository('core', 'Tag');
+//$nodeArticleRepository = $kernel->getBundleModelRepository('core', 'NodeArticle');
+//$contentRepository = $kernel->getBundleModelRepository('core', 'Content');
+//$tagRepository = $kernel->getBundleModelRepository('core', 'Tag');
 //$taxonomyRepository = $kernel->getBundleModelRepository('core', 'Taxonomy');
 //$taxItemRepository = $kernel->getBundleModelRepository('core', 'TaxonomyItem');
 
