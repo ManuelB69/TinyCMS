@@ -131,10 +131,11 @@ abstract class Bundle extends BaseBundle {
             $path[] = sprintf('%s/templates/%s', $themePath, $this->getName());
         }
         $path[] = sprintf('%s/templates', $this->getPath());
-        $parentBundle = $this->getParent();
-        if (null !== $parentBundle)
+        $parentName = $this->getParent();
+        if ($parentName)
         {
-            $path = array_merge($path, $parentBundle->getTemplatePaths($themePath));
+            $parent = $this->container->get('kernel')->getBundle($parentName, true);
+            $path = array_merge($path, $parent->getTemplatePaths($themePath));
         }
         return $path;
     }
