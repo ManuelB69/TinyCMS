@@ -2,7 +2,7 @@
 
 namespace bundle\core\library;
 
-interface WidgetInterface extends \library\ControllerInterface {
+interface WidgetInterface extends ControllerInterface {
 
     public function setId($value);
     

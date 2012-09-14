@@ -2,7 +2,7 @@
 
 namespace bundle\core\library;
 
-interface PanelInterface extends \library\ControllerInterface {
+interface PanelInterface extends ControllerInterface {
     
     public function generate();
 }

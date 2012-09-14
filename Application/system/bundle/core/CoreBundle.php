@@ -6,31 +6,6 @@ use \bundle\core\models;
 
 class CoreBundle extends \library\Bundle {
     
-    public function getTemplateLoader()
-    {
-        $paths = array();
-        $kernel = $this->getKernel();
-        if (!$this->equalBundle($kernel->getAppBundle()))
-        {
-            $path = $kernel->getBundlePrimaryTemplatePath($this->bundle, $this->theme);
-            if (file_exists($path)) $paths[] = $path;
-        }
-        $path = $kernel->getBundlePath($this->bundle, 'templates');
-        if (file_exists($path)) $paths[] = $path;
-        if (!$this->equalBundle('core'))
-        {
-            $path = $kernel->getBundlePrimaryTemplatePath('core', $this->theme);
-            if (file_exists($path)) $paths[] = $path;
-            $paths[] = $kernel->getCoreBundlePath('templates');
-        }
-        return new \Twig_Loader_Filesystem($paths);
-    }
-
-    public function createTemplating()
-    {
-        return new \Twig_Environment($this->getTemplateLoader());
-    }
-
     public function createContentElement(models\Content $content)
     {
         $contentType = $this->getKernel()->getContentType($content->getType());
