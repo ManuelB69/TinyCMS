@@ -1,0 +1,132 @@
+/*---------- Reset values for different elements --------*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+body {
+    line-height:1;
+}
+ol, ul {
+    list-style:none;
+    list-style-position:inside;
+}
+blockquote, q {
+    quotes:none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+:focus {
+    outline:0;
+}
+ins {
+    text-decoration:none;
+}
+del {
+    text-decoration:line-through;
+}
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+/*---------- Default values for different elements --------*/
+
+h1 { font-size:2.0em; margin-top:0.2em; margin-bottom:1.0em; }
+h2 { font-size:1.5em; margin-top:0.2em; margin-bottom:0.8em; }
+h3 { font-size:1.2em; margin-top:0.2em; margin-bottom:0.6em; }
+h4 { font-size:1.0em; margin-top:0.1em; margin-bottom:0.4em; }
+p { font-size:1.0em; margin-bottom:0.9em; }
+
+/*---------- Global styles --------*/
+
+.clear {
+    width:100%;
+    clear:both;
+}
+
+.left {
+    float:left;
+}
+
+.right {
+    float:right;
+}
+
+body {
+    color:#ffffff;
+    background-color:#a0d0ff;
+    width:900px;
+    margin:0 auto;
+    overflow:auto;
+}
+
+a:link, a:visited { text-decoration:none; }
+a:hover, a:active { text-decoration:underline; }
+
+q:lang(de)    { quotes:"\201E" "\201C" "\201A" "\2018"; }
+q:lang(de-DE) { quotes:"\00BB" "\00AB" "\203A" "\2039"; }
+q:lang(de-CH) { quotes:"\00AB" "\00BB" "\2039" "\203A"; }
+q:lang(en)    { quotes:"\201C" "\201D" "\2018" "\2019"; }
+q:lang(fr)    { quotes:"\00AB\00A0" "\00A0\00BB" "\2039\00A0" "\00A0\203A"; }
+
+/*---------- Header styles --------*/
+
+#header {
+    background-color:#2e353f;
+}
+
+#header .menu {
+    text-align:right;
+    padding:6px 4px;
+}
+
+#header .menu a {
+    font-family:'Century Gothic', sans-serif;
+    font-size:16px;
+    font-weight:500;
+}
+
+#header .menu a:link,
+#header .menu a:visited { color:#808080; }
+#header .menu a:hover { color:#a0a0a0; }
+#header .menu a:active { color:#909090; }
+
+/*---------- Footer styles --------*/
+
+#footer {
+    background-color:#2e353f;
+    border-top:3px solid black;
+    padding:18px 0;
+    font-family:'Century Gothic', sans-serif;
+    font-size:11px;
+    text-align:center;
+}
+
+/*---------- Content styles --------*/
+
+#content {
+    background-color:#d0d0d0;
+    color:#1f1f1f;
+    padding:18px 0;
+}
+
+/*---------- End of File --------*/
+

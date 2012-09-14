@@ -1,0 +1,128 @@
+/*---------- Content Edit styles --------*/
+
+#content .content_edit_header {
+    padding:0px 5px;
+}
+
+#content .content_edit {
+    padding:0px 5px;
+}
+
+#content .content_edit a.icon {
+    border:1px solid #808044;
+    background-color:#f0f0ee;
+    display:block;
+    height:20px;
+    width: 20px;
+    margin-right:2px;
+}
+
+#content .content_edit a.icon:hover { background-color:#f080ee; }
+#content .content_edit a.icon:active { background-color:#f000ee; }
+#content .content_edit a.icon_selected { background-color:#f000ee; }
+
+#content .content_edit span.icon {
+    background-image:url('backend/icons.gif');
+    display:block;
+    width:20px;
+    height:20px;
+}
+
+#content .content_edit span.icon_align_left { background-position:-460px 0; }
+#content .content_edit span.icon_align_right { background-position:-420px 0; }
+#content .content_edit span.icon_align_center { background-position:-480px 0; }
+
+#content .content_edit div.simple_label {
+    background-color:#e0e0e0;
+    margin:5px 0;
+    padding:5px 5px;
+}
+
+#content .content_edit div.simple_label td {
+    padding:2px 0px;
+}
+
+#content .content_edit div.simple_label input {
+    margin-left:10px;
+}
+
+#content .content_edit div.paragraph_label {
+    background-color:#e0e0e0;
+    margin:5px 0;
+    padding:5px 5px;
+}
+
+#content .content_edit div.paragraph_label textarea {
+    background-color:white;
+    border-color:gray;
+    overflow:auto;
+    width:520px;
+}
+
+#content .content_edit div.paragraph_label div.images > a {
+    margin-right:2px;
+    margin-bottom:2px;
+    padding:3px;
+    float:left;
+}
+
+#content .content_edit div.paragraph_label div.images > a:hover {
+    border:1px solid #aaaaaa;
+    padding:2px;
+}
+
+#content .content_edit div.paragraph_label div.images > a:active {
+    border:1px solid black;
+    padding:2px;
+}
+
+#content .content_edit div.paragraph_label div.image_property {
+    border:1px solid black;
+    margin-right:2px;
+    margin-bottom:2px;
+    padding:3px;
+}
+
+#content .content_edit div.paragraph_label div.image_property td {
+    vertical-align:middle;
+}
+
+#content .content_edit div.paragraph_label div.image_property td.title > label {
+    margin-left:6px;
+}
+
+#content .content_edit div.paragraph_label div.image_property td.title > input {
+    width:250px;
+}
+
+#content .content_edit div.paragraph_label div.links {
+}
+
+#content .content_edit div.paragraph_label div.links ol {
+    list-style-type:decimal;
+}
+
+#content .content_edit div.paragraph_label div.links ol > li {
+}
+
+#content .content_edit div.paragraph_label div.links span.separator {
+    font-weight:bold;
+}
+
+#content .content_edit div.paragraph_label div.link_property {
+    border:1px solid black;
+    margin-right:2px;
+    margin-bottom:2px;
+    padding:3px;
+}
+
+#content .content_edit div.paragraph_label div.link_property > div span.url > input {
+    width:250px;
+}
+
+#content .content_edit div.paragraph_label div.link_property > div span.title > input {
+    width:250px;
+}
+
+/*---------- End of File --------*/
+
