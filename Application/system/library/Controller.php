@@ -8,28 +8,34 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 abstract class Controller extends ContainerAware implements ControllerInterface {
     
     protected $options;
-    protected $kernel;
     protected $bundle;
-    protected $request;
     protected $theme;
     protected $templating;
     protected $htmlTemplateFormat;
     protected $htmlHeader;
     
-    public function __construct(Kernel $kernel, $options=array()) 
+    public function __construct($bundle, $options=array()) 
     {
         $this->options = array_merge(array(
                 'lang' => 'en'), $options);
-        $this->kernel = $kernel;
-        $this->bundle = $kernel->parseBundleName($this);
-        $this->theme = 'default';
+        $this->bundle = $bundle;
+        $this->theme = null;
         $this->htmlTemplateFormat = 'html';
-        $this->htmlHeader = new HtmlHeader();
+        $this->htmlHeader = null;
         $this->templating = null;
-        $this->request = null;
     }
     
-    public function generateUrl($routeName, $parameters=array(), $absolute=false)
+    public function getBundle()
+    {
+        return $this->container->get('kernel')->getBundle($this->bundle, true);
+    }
+
+    public function equalBundle($bundle)
+    {
+        return ($this->bundle === $bundle);
+    }
+    
+    public function generateUrl($route, $parameters=array(), $absolute=false)
     {
         return $this->container->get('router')->generate($route, $parameters, $absolute);
     }
@@ -42,16 +48,6 @@ abstract class Controller extends ContainerAware implements ControllerInterface 
     public function redirect($url, $status = 302)
     {
         return new RedirectResponse($url, $status);
-    }
-    
-    public function getBundle()
-    {
-        return $this->bundle;
-    }
-    
-    public function equalBundle($bundle)
-    {
-        return ($this->bundle === $bundle);
     }
     
     abstract public function createTemplating();
@@ -76,16 +72,6 @@ abstract class Controller extends ContainerAware implements ControllerInterface 
         return $this->getTemplating()->loadTemplate($templateFullName);
     }
     
-    public function setRequest(Request $request) 
-    {
-        $this->request = $request;
-    }
-    
-    public function getRequest() 
-    {
-        return $this->request;
-    }
-
     public function setTheme($theme)
     {
         $this->theme = $theme;
@@ -108,12 +94,11 @@ abstract class Controller extends ContainerAware implements ControllerInterface 
 
     public function getHtmlHeader()
     {
+        if (null == $this->htmlHeader)
+        {
+            $this->htmlHeader = new HtmlHeader();
+        }
         return $this->htmlHeader;
-    }
-
-    public function getKernel()
-    {
-        return $this->kernel;
     }
 }
 
