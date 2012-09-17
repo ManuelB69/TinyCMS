@@ -12,6 +12,24 @@ abstract class Bundle extends BaseBundle {
     protected $panelTypes;
     protected $customTypes;
     
+    final protected function getQualifiedParentObject()
+    {
+        $parentName = $this->getParent();
+        if ($parentName)
+        {
+            $kernel = $this->container->get('kernel');
+            $parent = $kernel->getBundle($parentName, true);
+            while (!($parent instanceof Bundle))
+            {
+                $parentName = $parent->getParent();
+                if (!$parentName) return null;
+                $parent = $kernel->getBundle($parentName, true);
+            }
+            return $parent;
+        }
+        return null;
+    }
+    
     public function setContentType($typeName, ContentType $contentType)
     {
         if (null === $this->contentTypes)
@@ -26,10 +44,9 @@ abstract class Bundle extends BaseBundle {
         $contentType = (null !== $this->contentTypes) ? $this->contentTypes[$typeName] : null;
         if (null === $contentType)
         {
-            $parentName = $this->getParent();
-            if ($parentName)
+            $parent = $this->getQualifiedParentObject();
+            if (null !== $parent)
             {
-                $parent = $this->container->get('kernel')->getBundle($parentName, true);
                 $contentType = $parent->getContentType($typeName);
             }
         }
@@ -50,10 +67,9 @@ abstract class Bundle extends BaseBundle {
         $widgetType = (null !== $this->widgetTypes) ? $this->widgetTypes[$typeName] : null;
         if (null === $widgetType)
         {
-            $parentName = $this->getParent();
-            if ($parentName)
+            $parent = $this->getQualifiedParentObject();
+            if (null !== $parent)
             {
-                $parent = $this->container->get('kernel')->getBundle($parentName, true);
                 $widgetType = $parent->getWidgetType($typeName);
             }
         }
@@ -74,10 +90,9 @@ abstract class Bundle extends BaseBundle {
         $panelType = (null !== $this->panelTypes) ? $this->panelTypes[$typeName] : null;
         if (null === $panelType)
         {
-            $parentName = $this->getParent();
-            if ($parentName)
+            $parent = $this->getQualifiedParentObject();
+            if (null !== $parent)
             {
-                $parent = $this->container->get('kernel')->getBundle($parentName, true);
                 $panelType = $parent->getPanelType($typeName);
             }
         }
@@ -98,10 +113,9 @@ abstract class Bundle extends BaseBundle {
         $customType = (null !== $this->customTypes) ? $this->customTypes[$typeName] : null;
         if (null === $customType)
         {
-            $parentName = $this->getParent();
-            if ($parentName)
+            $parent = $this->getQualifiedParentObject();
+            if (null !== $parent)
             {
-                $parent = $this->container->get('kernel')->getBundle($parentName, true);
                 $customType = $parent->getCustomType($typeName);
             }
         }
@@ -134,10 +148,9 @@ abstract class Bundle extends BaseBundle {
             }
             else
             {
-                $parentName = $this->getParent();
-                if ($parentName)
+                $parent = $this->getQualifiedParentObject();
+                if (null !== $parent)
                 {
-                    $parent = $this->container->get('kernel')->getBundle($parentName, true);
                     return $parent->hasService($serviceId, false);
                 }
             }
@@ -155,10 +168,9 @@ abstract class Bundle extends BaseBundle {
             }
             else
             {
-                $parentName = $this->getParent();
-                if ($parentName)
+                $parent = $this->getQualifiedParentObject();
+                if (null !== $parent)
                 {
-                    $parent = $this->container->get('kernel')->getBundle($parentName, true);
                     return $parent->getService($serviceId, false);
                 }
             }
@@ -174,10 +186,9 @@ abstract class Bundle extends BaseBundle {
             $path[] = sprintf('%s/templates/%s', $themePath, $this->getName());
         }
         $path[] = sprintf('%s/templates', $this->getPath());
-        $parentName = $this->getParent();
-        if ($parentName)
+        $parent = $this->getQualifiedParentObject();
+        if (null !== $parent)
         {
-            $parent = $this->container->get('kernel')->getBundle($parentName, true);
             $path = array_merge($path, $parent->getTemplatePaths($themePath));
         }
         return $path;

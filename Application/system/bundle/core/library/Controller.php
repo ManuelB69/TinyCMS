@@ -18,6 +18,16 @@ abstract class Controller extends ContainerAware implements ControllerInterface 
     {
         return $this->parent;
     }
+    
+    final public function getQualifiedParent()
+    {
+        $parent = $this->parent;
+        while (!($parent instanceof Controller))
+        {
+            $parent = $parent->getParent();
+        }
+        return $parent;
+    }    
 
     public function setBundle(Bundle $bundle)
     {
@@ -29,7 +39,7 @@ abstract class Controller extends ContainerAware implements ControllerInterface 
         $bundle = $this->bundle;
         if (null === $bundle)
         {
-            $parent = $this->getParent();
+            $parent = $this->getQualifiedParent();
             if (null !== $parent)
             {
                 $bundle = $parent->getBundle();
@@ -90,7 +100,7 @@ abstract class Controller extends ContainerAware implements ControllerInterface 
     
     public function getHtmlHeader()
     {
-        $parent = $this->getParent();
+        $parent = $this->getQualifiedParent();
         if (null !== $parent)
         {
             return $parent->getHtmlHeader();
@@ -100,7 +110,7 @@ abstract class Controller extends ContainerAware implements ControllerInterface 
 
     public function loadTemplate($templateName)
     {
-        $parent = $this->getParent();
+        $parent = $this->getQualifiedParent();
         if (null !== $parent)
         {
             return $parent->loadTemplate($templateName);
