@@ -4,7 +4,7 @@ namespace bundle\core\library;
 
 use Symfony\Component\HttpKernel\Bundle as BaseBundle;
 
-abstract class Bundle extends BaseBundle {
+abstract class Bundle extends BaseBundle implements BundleInterface {
     
     protected $localContainer;
     protected $contentTypes;
@@ -19,7 +19,7 @@ abstract class Bundle extends BaseBundle {
         {
             $kernel = $this->container->get('kernel');
             $parent = $kernel->getBundle($parentName, true);
-            while (!($parent instanceof Bundle))
+            while (!($parent instanceof BundleInterface))
             {
                 $parentName = $parent->getParent();
                 if (!$parentName) return null;
@@ -28,6 +28,46 @@ abstract class Bundle extends BaseBundle {
             return $parent;
         }
         return null;
+    }
+    
+    public function hasService($serviceId, $globalOnly=false)
+    {
+        if (true !== $globalOnly)
+        {
+            if (null !== $this->localContainer && $this->localContainer->has($serviceId))
+            {
+                return true;
+            }
+            else
+            {
+                $parent = $this->getQualifiedParentObject();
+                if (null !== $parent)
+                {
+                    return $parent->hasService($serviceId, false);
+                }
+            }
+        }
+        return $this->container->has($serviceId);
+    }
+    
+    public function getService($serviceId, $globalOnly=false)
+    {
+        if (true !== $globalOnly)
+        {
+            if (null !== $this->localContainer && $this->localContainer->has($serviceId))
+            {
+                return $this->localContainer->get($serviceId);
+            }
+            else
+            {
+                $parent = $this->getQualifiedParentObject();
+                if (null !== $parent)
+                {
+                    return $parent->getService($serviceId, false);
+                }
+            }
+        }
+        return $this->container->get($serviceId);
     }
     
     public function setContentType($typeName, ContentType $contentType)
@@ -138,46 +178,6 @@ abstract class Bundle extends BaseBundle {
         return sprintf('\\%s\\controller\\%s', $this->getNamespace(), $controllerName);
     }
 
-    public function hasService($serviceId, $globalOnly=false)
-    {
-        if (true !== $globalOnly)
-        {
-            if (null !== $this->localContainer && $this->localContainer->has($serviceId))
-            {
-                return true;
-            }
-            else
-            {
-                $parent = $this->getQualifiedParentObject();
-                if (null !== $parent)
-                {
-                    return $parent->hasService($serviceId, false);
-                }
-            }
-        }
-        return $this->container->has($serviceId);
-    }
-    
-    public function getService($serviceId, $globalOnly=false)
-    {
-        if (true !== $globalOnly)
-        {
-            if (null !== $this->localContainer && $this->localContainer->has($serviceId))
-            {
-                return $this->localContainer->get($serviceId);
-            }
-            else
-            {
-                $parent = $this->getQualifiedParentObject();
-                if (null !== $parent)
-                {
-                    return $parent->getService($serviceId, false);
-                }
-            }
-        }
-        return $this->container->get($serviceId);
-    }
-    
     public function getTemplatePaths($themePath)
     {
         $path = array();
