@@ -22,9 +22,13 @@ abstract class Controller extends ContainerAware implements ControllerInterface 
     final protected function getQualifiedParent()
     {
         $parent = $this->parent;
-        while (!($parent instanceof Controller))
+        if (null !== $parent)
         {
-            $parent = $parent->getParent();
+            while (!($parent instanceof Controller))
+            {
+                $parent = $parent->getParent();
+                if (null === $parent) return null;
+            }
         }
         return $parent;
     }    
