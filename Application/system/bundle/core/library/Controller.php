@@ -1,9 +1,8 @@
 <?php
 
-namespace library;
+namespace bundle\core\library;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
-use Symfony\Component\HttpFoundation\Request;
 
 abstract class Controller extends ContainerAware implements ControllerInterface {
     
@@ -46,8 +45,7 @@ abstract class Controller extends ContainerAware implements ControllerInterface 
 
     public function createContentElement(models\Content $content)
     {
-        $bundle = $this->getBundle();
-        $contentType = $bundle->getContentType($content->getType());
+        $contentType = $this->getBundle()->getContentType($content->getType());
         $elementClass = $contentType->getElementClass();
         $element = new $elementClass($content);
         $element->setParent($this);
@@ -56,63 +54,40 @@ abstract class Controller extends ContainerAware implements ControllerInterface 
 
     public function createContentWidget(models\Content $content)
     {
-        $bundle = $this->getBundle();
-        $contentType = $bundle->getContentType($content->getType());
+        $contentType = $this->getBundle()->getContentType($content->getType());
         $widgetClass = $contentType->getWidgetClass();
         $widget = new $widgetClass($content);
         $widget->setParent($this);
         return $widget;
     }
     
-    public function createModelPanel($panelTypeName, $model)
-    {
-        $bundle = $this->getBundle();
-        $panelType = $bundle->getPanelType($panelTypeName);
-        $panelClass = $panelType->getPanelClass();
-        $panelValueClass = $panelType->getValueClass();
-        if (!($model instanceof $panelValueClass))
-        {
-            $error = sprintf('Object type not an instance of class: <%s>', $panelValueClass);
-            throw new \Exception($error);
-        }
-        $panel = new $panelClass($model);
-        $panel->setParent($this);
-        return $panel;
-    }
-
-    public function createModelWidget($widgetTypeName, $model)
-    {
-        $bundle = $this->getBundle();
-        $widgetType = $bundle->getWidgetType($widgetTypeName);
-        $widgetClass = $widgetType->getWidgetClass();
-        $widgetValueClass = $widgetType->getValueClass();
-        if (!($model instanceof $widgetValueClass))
-        {
-            $error = sprintf('Object type not an instance of class: <%s>', $widgetValueClass);
-            throw new \Exception($error);
-        }
-        $widget = new $widgetClass($model);
-        $widget->setParent($this);
-        return $widget;
-    }
-
-    public function createPanel($panelClass)
-    {
-        $panel = new $panelClass();
-        $panel->setParent($this);
-        return $panel;
-    }
-
     public function createWidget($widgetTypeName, $value)
     {
-        $bundle = $this->getBundle();
-        $widgetType = $bundle->getWidgetType($widgetTypeName);
+        $widgetType = $this->getBundle()->getWidgetType($widgetTypeName);
         $widgetClass = $widgetType->getWidgetClass();
         $widget = new $widgetClass($value);
         $widget->setParent($this);
         return $widget;
     }
+    
+    public function has($serviceId, $globalOnly=false)
+    {
+        if (true !== $globalOnly)
+        {
+            return $this->getBundle()->hasService($serviceId, false);
+        }
+        return $this->container->has($serviceId);
+    }
 
+    public function get($serviceId, $globalOnly=false)
+    {
+        if (true !== $globalOnly)
+        {
+            return $this->getBundle()->getService($serviceId, false);
+        }
+        return $this->container->get($serviceId);
+    }
+    
     public function getHtmlHeader()
     {
         $parent = $this->getParent();
@@ -136,6 +111,21 @@ abstract class Controller extends ContainerAware implements ControllerInterface 
     public function renderTemplate($templateName, array $context)
     {
         return $this->loadTemplate($templateName)->render($context);
+    }
+
+    public function forward($controller, array $path, array $query)
+    {
+        return $this->container->get('http_kernel')->forward($controller, $path, $query);
+    }
+
+    public function generateUrl($route, $parameters, $absolute)
+    {
+        return $this->container->get('router')->generate($route, $parameters, $absolute);
+    }
+    
+    public function redirect($url, $status = 302)
+    {
+        return new RedirectResponse($url, $status);
     }
 }
 

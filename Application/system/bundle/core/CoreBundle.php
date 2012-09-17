@@ -2,59 +2,58 @@
 
 namespace bundle\core;
 
-use \bundle\core\models;
-
 class CoreBundle extends library\Bundle {
     
     public function __construct()
     {
+        $bundleNamespace = $this->getNamespace();
         $this->contentTypes = array(
             'Root' => new ContentType(array(
-                'elementClass' => '\\bundle\\core\\elements\\ContentRoot',
-                'widgetClass' => '\\bundle\\core\\elements\\ContentRootWidget')),
+                'elementClass' => $bundleNamespace . '\\elements\\ContentRoot',
+                'widgetClass' => $bundleNamespace . '\\elements\\ContentRootWidget')),
             'Text' => new ContentType(array(
-                'elementClass' => '\\bundle\\core\\elements\\ContentText',
-                'widgetClass' => '\\bundle\\core\\elements\\ContentTextWidget')),
+                'elementClass' => $bundleNamespace . '\\elements\\ContentText',
+                'widgetClass' => $bundleNamespace . '\\elements\\ContentTextWidget')),
             'Headline' => new ContentType(array(
-                'elementClass' => '\\bundle\\core\\elements\\ContentHeadline',
-                'widgetClass' => '\\bundle\\core\\elements\\ContentHeadlineWidget')),
+                'elementClass' => $bundleNamespace . '\\elements\\ContentHeadline',
+                'widgetClass' => $bundleNamespace . '\\elements\\ContentHeadlineWidget')),
             'Image' => new ContentType(array(
-                'elementClass' => '\\bundle\\core\\elements\\ContentImage',
-                'widgetClass' => '\\bundle\\core\\elements\\ContentImageWidget')),
+                'elementClass' => $bundleNamespace . '\\elements\\ContentImage',
+                'widgetClass' => $bundleNamespace . '\\elements\\ContentImageWidget')),
             'Link' => new ContentType(array(
-                'elementClass' => '\\bundle\\core\\elements\\ContentLink',
-                'widgetClass' => '\\bundle\\core\\elements\\ContentLinkWidget')),
+                'elementClass' => $bundleNamespace . '\\elements\\ContentLink',
+                'widgetClass' => $bundleNamespace . '\\elements\\ContentLinkWidget')),
             'Gallery' => new ContentType(array(
-                'elementClass' => '\\bundle\\core\\elements\\ContentGallery',
-                'widgetClass' => '\\bundle\\core\\elements\\ContentGalleryWidget')),
+                'elementClass' => $bundleNamespace . '\\elements\\ContentGallery',
+                'widgetClass' => $bundleNamespace . '\\elements\\ContentGalleryWidget')),
             'Custom' => new ContentType(array(
-                'elementClass' => '\\bundle\\core\\elements\\ContentCustom',
-                'widgetClass' => '\\bundle\\core\\elements\\ContentCustomWidget')));
+                'elementClass' => $bundleNamespace . '\\elements\\ContentCustom',
+                'widgetClass' => $bundleNamespace . '\\elements\\ContentCustomWidget')));
         $this->panelTypes = array(
             'ArticleFull' => new PanelType(array(
-                'panelClass' => '\\bundle\\core\\controller\\ArticleFull',
-                'valueClass' => '\\bundle\\core\\models\\Article')),
+                'panelClass' => $bundleNamespace . '\\controller\\ArticleFull',
+                'valueClass' => $bundleNamespace . '\\models\\Article')),
             'ArticleShortItem' => new PanelType(array(
-                'panelClass' => '\\bundle\\core\\controller\\ArticleShortItem',
-                'valueClass' => '\\bundle\\core\\models\\Article')),
+                'panelClass' => $bundleNamespace . '\\controller\\ArticleShortItem',
+                'valueClass' => $bundleNamespace . '\\models\\Article')),
             'ArticleTeaserItem' => new PanelType(array(
-                'panelClass' => '\\bundle\\core\\controller\\ArticleTeaserItem',
-                'valueClass' => '\\bundle\\core\\models\\Article')),
+                'panelClass' => $bundleNamespace . '\\controller\\ArticleTeaserItem',
+                'valueClass' => $bundleNamespace . '\\models\\Article')),
             'ArticleShortList' => new PanelType(array(
-                'panelClass' => '\\bundle\\core\\controller\\ArticleShortList',
-                'valueClass' => '\\bundle\\core\\models\\NodeArticle')),
+                'panelClass' => $bundleNamespace . '\\controller\\ArticleShortList',
+                'valueClass' => $bundleNamespace . '\\models\\NodeArticle')),
             'ArticleTeaserList' => new PanelType(array(
-                'panelClass' => '\\bundle\\core\\controller\\ArticleTeaserList',
-                'valueClass' => '\\bundle\\core\\models\\NodeArticle')));
+                'panelClass' => $bundleNamespace . '\\controller\\ArticleTeaserList',
+                'valueClass' => $bundleNamespace . '\\models\\NodeArticle')));
         $this->widgetTypes = array(
             'Article' => new WidgetType(array(
-                'widgetClass' => '\\bundle\\core\\controller\\ArticleWidget',
-                'valueClass' => '\\bundle\\core\\models\\Article')),
+                'widgetClass' => $bundleNamespace . '\\controller\\ArticleWidget',
+                'valueClass' => $bundleNamespace . '\\models\\Article')),
             'Taxonomy' => new WidgetType(array(
-                'widgetClass' => '\\bundle\\core\\controller\\TaxonomyWidget',
-                'valueClass' => '\\bundle\\core\\models\\Taxonomy')),
+                'widgetClass' => $bundleNamespace . '\\controller\\TaxonomyWidget',
+                'valueClass' => $bundleNamespace . '\\models\\Taxonomy')),
             'Page' => new WidgetType(array(
-                'widgetClass' => '\\bundle\\core\\controller\\PageWidget',
-                'valueClass' => '\\bundle\\core\\models\\Page')));
+                'widgetClass' => $bundleNamespace . '\\controller\\PageWidget',
+                'valueClass' => $bundleNamespace . '\\models\\Page')));
     }
 }

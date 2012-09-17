@@ -1,8 +1,7 @@
 <?php
 
-namespace library;
+namespace bundle\core\library;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
 interface ControllerInterface extends ContainerAwareInterface {

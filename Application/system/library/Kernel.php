@@ -6,8 +6,6 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 
 abstract class Kernel extends BaseKernel {
     
-    protected $customTypes;
-    protected $panelTypes;
     protected $language;
     protected $appBundle;
     protected $systemPath;
@@ -24,7 +22,6 @@ abstract class Kernel extends BaseKernel {
         $this->appBundle = $options['app_bundle'];
         $this->systemPath = $options['system_path'];
         $this->themesPath = $options['themes_path'];
-        $this->entityManager = null;
     }
     
     public function setLanguage($language)
@@ -50,36 +47,6 @@ abstract class Kernel extends BaseKernel {
     public function getAppBundle()
     {
         return $this->appBundle;
-    }
-    
-    public function setCustomType($typeName, CustomType $customType)
-    {
-        $this->customTypes[$typeName] = $customType;
-    }
-    
-    public function getCustomType($typeName)
-    {
-        return $this->customTypes[$typeName];
-    }
-    
-    public function setPanelType($typeName, PanelType $panelType)
-    {
-        $this->panelTypes[$typeName] = $panelType;
-    }
-    
-    public function getPanelType($typeName)
-    {
-        return $this->panelTypes[$typeName];
-    }
-    
-    public function setWidgetType($typeName, WidgetType $widgetType)
-    {
-        $this->widgetTypes[$typeName] = $widgetType;
-    }
-    
-    public function getWidgetType($typeName)
-    {
-        return $this->widgetTypes[$typeName];
     }
 }
 

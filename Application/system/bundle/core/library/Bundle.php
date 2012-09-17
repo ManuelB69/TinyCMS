@@ -6,6 +6,7 @@ use Symfony\Component\HttpKernel\Bundle as BaseBundle;
 
 abstract class Bundle extends BaseBundle {
     
+    protected $localContainer;
     protected $contentTypes;
     protected $widgetTypes;
     protected $panelTypes;
@@ -123,6 +124,48 @@ abstract class Bundle extends BaseBundle {
         return sprintf('\\%s\\controller\\%s', $this->getNamespace(), $controllerName);
     }
 
+    public function hasService($serviceId, $globalOnly=false)
+    {
+        if (true !== $globalOnly)
+        {
+            if (null !== $this->localContainer && $this->localContainer->has($serviceId))
+            {
+                return true;
+            }
+            else
+            {
+                $parentName = $this->getParent();
+                if ($parentName)
+                {
+                    $parent = $this->container->get('kernel')->getBundle($parentName, true);
+                    return $parent->hasService($serviceId, false);
+                }
+            }
+        }
+        return $this->container->has($serviceId);
+    }
+    
+    public function getService($serviceId, $globalOnly=false)
+    {
+        if (true !== $globalOnly)
+        {
+            if (null !== $this->localContainer && $this->localContainer->has($serviceId))
+            {
+                return $this->localContainer->get($serviceId);
+            }
+            else
+            {
+                $parentName = $this->getParent();
+                if ($parentName)
+                {
+                    $parent = $this->container->get('kernel')->getBundle($parentName, true);
+                    return $parent->getService($serviceId, false);
+                }
+            }
+        }
+        return $this->container->get($serviceId);
+    }
+    
     public function getTemplatePaths($themePath)
     {
         $path = array();
