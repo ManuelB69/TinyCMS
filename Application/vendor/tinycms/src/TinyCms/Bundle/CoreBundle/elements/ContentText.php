@@ -2,10 +2,10 @@
 
 namespace TinyCms\Bundle\CoreBundle\elements;
 
-use \library\Kernel;
+use TinyCms\Bundle\CoreBundle\library\ContentElement;
 use \TinyCms\Bundle\CoreBundle\models\Content;
 
-class ContentText extends \TinyCms\Bundle\CoreBundle\library\ContentElement {
+class ContentText extends ContentElement {
 
     public function generate()
     {
