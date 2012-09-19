@@ -2,7 +2,8 @@
 
 namespace TinyCms\Bundle\CoreBundle\elements;
 
-use TinyCms\Bundle\CoreBundle\library\ContentElement;
+use \library\Kernel;
+use \TinyCms\Bundle\CoreBundle\models\Content;
 
 class ContentLink extends \TinyCms\Bundle\CoreBundle\library\ContentElement {
 
