@@ -1,0 +1,11 @@
+<div class="item">
+{% if image %}    
+{{ image|raw }}
+{% endif %}    
+{% if title %}
+<div class="title">{{ title }}</div>
+{% endif %}
+{% if content %}    
+{{ content|raw }}
+{% endif %}    
+</div>
