@@ -1,6 +1,6 @@
 <?php
 
-namespace bundle\core\library;
+namespace Tinycms\Bundle\CoreBundle\library;
 
 use Symfony\Component\HttpKernel\BundleInterface as BaseBundleInterface;
 

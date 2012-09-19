@@ -1,5 +1,5 @@
 <?php
-namespace bundle\core\models;
+namespace Tinycms\Bundle\CoreBundle\models;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -19,14 +19,14 @@ class NodeArticle {
     protected $id;
 	
     /**
-     * @ManyToOne(targetEntity="bundle\core\models\NodeArticle", inversedBy="children")
+     * @ManyToOne(targetEntity="Tinycms\Bundle\CoreBundle\models\NodeArticle", inversedBy="children")
      * @Desc: parent for <NodeArticle> trees
      * 
      */
     protected $parent;
 
     /**
-     * @OneToMany(targetEntity="bundle\core\models\NodeArticle", mappedBy="parent", cascade={"persist"})
+     * @OneToMany(targetEntity="Tinycms\Bundle\CoreBundle\models\NodeArticle", mappedBy="parent", cascade={"persist"})
      * @Desc: children for <NodeArticle> trees
      *   
      */
@@ -47,7 +47,7 @@ class NodeArticle {
     protected $section = '';
     
     /**
-     * @OneToMany(targetEntity="bundle\core\models\Article", mappedBy="node", cascade={"persist"})
+     * @OneToMany(targetEntity="Tinycms\Bundle\CoreBundle\models\Article", mappedBy="node", cascade={"persist"})
      * 
      */
     protected $articles;

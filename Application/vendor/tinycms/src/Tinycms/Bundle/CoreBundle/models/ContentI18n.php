@@ -1,5 +1,5 @@
 <?php
-namespace bundle\core\models;
+namespace Tinycms\Bundle\CoreBundle\models;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class ContentI18n {
 
     /**
-     * @Id @ManyToOne(targetEntity="bundle\core\models\Content", inversedBy="i18ns")
+     * @Id @ManyToOne(targetEntity="Tinycms\Bundle\CoreBundle\models\Content", inversedBy="i18ns")
      * @Desc: base content
      * 
      */

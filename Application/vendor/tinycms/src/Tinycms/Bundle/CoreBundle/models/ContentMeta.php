@@ -1,5 +1,5 @@
 <?php
-namespace bundle\core\models;
+namespace Tinycms\Bundle\CoreBundle\models;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -20,7 +20,7 @@ class ContentMeta {
     protected $id;
     
     /**
-     * @ManyToOne(targetEntity="bundle\core\models\Content", inversedBy="metas")
+     * @ManyToOne(targetEntity="Tinycms\Bundle\CoreBundle\models\Content", inversedBy="metas")
      * @Desc: base content
      * 
      */

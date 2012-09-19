@@ -1,10 +1,17 @@
 <?php
 
-namespace bundle\core;
+namespace Tinycms\Bundle\CoreBundle;
 
 class CoreBundle extends library\Bundle {
     
-    public function __construct()
+    const BUNDLE_NAME = "TinyCmsCoreBundle";
+    
+    public function getName()
+    {
+       return self::BUNDLE_NAME; 
+    }
+    
+    public function boot()
     {
         $bundleNamespace = $this->getNamespace();
         $this->contentTypes = array(
@@ -55,5 +62,12 @@ class CoreBundle extends library\Bundle {
             'Page' => new WidgetType(array(
                 'widgetClass' => $bundleNamespace . '\\controller\\PageWidget',
                 'valueClass' => $bundleNamespace . '\\models\\Page')));
+    }
+    
+    public function shutdown()
+    {
+        $this->contentTypes = null;
+        $this->panelTypes = null;
+        $this->widgetTypes = null;
     }
 }

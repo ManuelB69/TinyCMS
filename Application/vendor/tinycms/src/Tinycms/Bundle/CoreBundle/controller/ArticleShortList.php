@@ -1,11 +1,11 @@
 <?php
 
-namespace bundle\core\controller;
+namespace Tinycms\Bundle\CoreBundle\controller;
 
 use \library\Kernel;
-use \bundle\core\models;
-use \bundle\core\models\Article;
-use \bundle\core\models\NodeArticle;
+use \Tinycms\Bundle\CoreBundle\models;
+use \Tinycms\Bundle\CoreBundle\models\Article;
+use \Tinycms\Bundle\CoreBundle\models\NodeArticle;
 
 class ArticleShortList extends ArticlePanel {
 

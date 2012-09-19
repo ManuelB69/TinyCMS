@@ -1,13 +1,13 @@
 <?php
 
-namespace bundle\core\controller;
+namespace Tinycms\Bundle\CoreBundle\controller;
 
-use bundle\core\library\Widget;
-use bundle\core\library\ModelWidgetInterface;
-use bundle\core\models;
-use bundle\core\models\Article;
+use Tinycms\Bundle\CoreBundle\library\Widget;
+use Tinycms\Bundle\CoreBundle\library\ModelWidgetInterface;
+use Tinycms\Bundle\CoreBundle\models;
+use Tinycms\Bundle\CoreBundle\models\Article;
 
-class ArticleWidget extends \bundle\core\library\ModelWidget {
+class ArticleWidget extends \Tinycms\Bundle\CoreBundle\library\ModelWidget {
 
     public function generate()
     {

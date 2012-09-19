@@ -1,5 +1,5 @@
 <?php
-namespace bundle\core\models;
+namespace Tinycms\Bundle\CoreBundle\models;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -25,27 +25,27 @@ class Comment {
      */
     
     /**
-     * @ManyToOne(targetEntity="bundle\core\models\NodeComment", inversedBy="comments")
+     * @ManyToOne(targetEntity="Tinycms\Bundle\CoreBundle\models\NodeComment", inversedBy="comments")
      * 
      */
     protected $node;
 	
     /**
-     * @ManyToOne(targetEntity="bundle\core\models\Comment", inversedBy="children")
+     * @ManyToOne(targetEntity="Tinycms\Bundle\CoreBundle\models\Comment", inversedBy="children")
      * @Desc: parent for <Comment> trees
      * 
      */
     protected $parent;
 	
     /**
-     * @OneToMany(targetEntity="bundle\core\models\Comment", mappedBy="parent", cascade={"persist"})
+     * @OneToMany(targetEntity="Tinycms\Bundle\CoreBundle\models\Comment", mappedBy="parent", cascade={"persist"})
      * @Desc: children for <Comment> trees
      *   
      */
     protected $children;    
     
     /**
-     * @OneToMany(targetEntity="bundle\core\models\CommentMeta", mappedBy="comment", cascade={"persist"})
+     * @OneToMany(targetEntity="Tinycms\Bundle\CoreBundle\models\CommentMeta", mappedBy="comment", cascade={"persist"})
      * @Desc: meta data for <Comment>
      *   
      */

@@ -1,5 +1,5 @@
 <?php
-namespace bundle\core\models;
+namespace Tinycms\Bundle\CoreBundle\models;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class CommentMeta {
 
     /**
-     * @Id @ManyToOne(targetEntity="bundle\core\models\Comment", inversedBy="metas")
+     * @Id @ManyToOne(targetEntity="Tinycms\Bundle\CoreBundle\models\Comment", inversedBy="metas")
      * @Desc: base comment
      * 
      */

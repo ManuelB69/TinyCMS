@@ -1,12 +1,12 @@
 <?php
 
-namespace bundle\core\controller;
+namespace Tinycms\Bundle\CoreBundle\controller;
 
-use bundle\core\library\Bundle;
-use bundle\core\library\PanelInterface;
-use bundle\core\models;
-use bundle\core\models\Comment;
-use bundle\core\models\NodeComment;
+use Tinycms\Bundle\CoreBundle\library\Bundle;
+use Tinycms\Bundle\CoreBundle\library\PanelInterface;
+use Tinycms\Bundle\CoreBundle\models;
+use Tinycms\Bundle\CoreBundle\models\Comment;
+use Tinycms\Bundle\CoreBundle\models\NodeComment;
 
 class CommentPanel extends Bundle implements PanelInterface {
 

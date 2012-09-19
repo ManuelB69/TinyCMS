@@ -1,6 +1,6 @@
 <?php
 
-namespace bundle\core\library;
+namespace Tinycms\Bundle\CoreBundle\library;
 
 class CustomTypeField {
 

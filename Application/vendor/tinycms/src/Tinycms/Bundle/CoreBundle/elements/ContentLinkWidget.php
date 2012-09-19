@@ -1,10 +1,10 @@
 <?php
 
-namespace bundle\core\widgets;
+namespace Tinycms\Bundle\CoreBundle\widgets;
 
-use bundle\core\library\ContentWidget;
-use bundle\core\models;
-use bundle\core\models\Content;
+use Tinycms\Bundle\CoreBundle\library\ContentWidget;
+use Tinycms\Bundle\CoreBundle\models;
+use Tinycms\Bundle\CoreBundle\models\Content;
 
 class ContentLinkWidget extends ContentWidget {
 
