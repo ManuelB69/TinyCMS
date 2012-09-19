@@ -1,5 +1,5 @@
 <?php
-namespace Tinycms\Bundle\CoreBundle\models;
+namespace TinyCms\Bundle\CoreBundle\models;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -19,28 +19,28 @@ class Content {
     protected $id;
 	
     /**
-     * @ManyToOne(targetEntity="Tinycms\Bundle\CoreBundle\models\Content", inversedBy="children")
+     * @ManyToOne(targetEntity="TinyCms\Bundle\CoreBundle\models\Content", inversedBy="children")
      * @Desc: parent for <Content> trees
      * 
      */
     protected $parent;
 	
     /**
-     * @OneToMany(targetEntity="Tinycms\Bundle\CoreBundle\models\Content", mappedBy="parent", cascade={"persist"})
+     * @OneToMany(targetEntity="TinyCms\Bundle\CoreBundle\models\Content", mappedBy="parent", cascade={"persist"})
      * @Desc: children for <Content> trees
      *   
      */
     protected $children;    
     
     /**
-     * @OneToMany(targetEntity="Tinycms\Bundle\CoreBundle\models\ContentI18n", mappedBy="content", cascade={"persist"})
+     * @OneToMany(targetEntity="TinyCms\Bundle\CoreBundle\models\ContentI18n", mappedBy="content", cascade={"persist"})
      * @Desc: langI18n variants for <Content>
      *   
      */
     protected $i18ns;    
     
     /**
-     * @OneToMany(targetEntity="Tinycms\Bundle\CoreBundle\models\ContentMeta", mappedBy="content", cascade={"persist"})
+     * @OneToMany(targetEntity="TinyCms\Bundle\CoreBundle\models\ContentMeta", mappedBy="content", cascade={"persist"})
      * @Desc: meta data for <Content>
      *   
      */
@@ -132,7 +132,7 @@ class Content {
     protected $tags;
     
     /**
-     * @OneToOne(targetEntity="Tinycms\Bundle\CoreBundle\models\NodeComment", cascade="persist")
+     * @OneToOne(targetEntity="TinyCms\Bundle\CoreBundle\models\NodeComment", cascade="persist")
      * @JoinColumn(name="node_comment_id", referencedColumnName="id")     
      * 
      */

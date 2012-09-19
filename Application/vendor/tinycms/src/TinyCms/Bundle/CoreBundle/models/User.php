@@ -1,5 +1,5 @@
 <?php
-namespace Tinycms\Bundle\CoreBundle\models;
+namespace TinyCms\Bundle\CoreBundle\models;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;

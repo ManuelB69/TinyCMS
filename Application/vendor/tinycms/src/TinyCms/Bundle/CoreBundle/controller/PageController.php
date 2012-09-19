@@ -1,11 +1,11 @@
 <?php
 
-namespace Tinycms\Bundle\CoreBundle\controller;
+namespace TinyCms\Bundle\CoreBundle\controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class PageController extends \Tinycms\Bundle\CoreBundle\library\Frontend {
+class PageController extends \TinyCms\Bundle\CoreBundle\library\Frontend {
     
     public function showAction($alias)
     {

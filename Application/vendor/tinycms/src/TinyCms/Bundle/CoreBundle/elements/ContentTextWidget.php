@@ -1,10 +1,10 @@
 <?php
 
-namespace Tinycms\Bundle\CoreBundle\widgets;
+namespace TinyCms\Bundle\CoreBundle\widgets;
 
-use Tinycms\Bundle\CoreBundle\library\ContentWidget;
-use Tinycms\Bundle\CoreBundle\models;
-use Tinycms\Bundle\CoreBundle\models\Content;
+use TinyCms\Bundle\CoreBundle\library\ContentWidget;
+use TinyCms\Bundle\CoreBundle\models;
+use TinyCms\Bundle\CoreBundle\models\Content;
 
 class ContentTextWidget extends ContentWidget {
 

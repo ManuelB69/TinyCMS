@@ -1,6 +1,6 @@
 <?php
 
-namespace Tinycms\Bundle\CoreBundle\library;
+namespace TinyCms\Bundle\CoreBundle\library;
 
 use Symfony\Component\HttpKernel\Bundle as BaseBundle;
 

@@ -1,12 +1,12 @@
 <?php
-namespace Tinycms\Bundle\CoreBundle\models;
+namespace TinyCms\Bundle\CoreBundle\models;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @Entity(repositoryClass="Tinycms\Bundle\CoreBundle\models\ArticleRepository")
+ * @Entity(repositoryClass="TinyCms\Bundle\CoreBundle\models\ArticleRepository")
  * @Table(name="tcm_articles", 
  *        indexes={@index(name="IDX_ALIAS", columns={"alias"})})
  */
@@ -21,7 +21,7 @@ class Article {
     protected $id;
 	
     /**
-     * @ManyToOne(targetEntity="Tinycms\Bundle\CoreBundle\models\NodeArticle", inversedBy="articles")
+     * @ManyToOne(targetEntity="TinyCms\Bundle\CoreBundle\models\NodeArticle", inversedBy="articles")
      * 
      */
     protected $node;
@@ -55,21 +55,21 @@ class Article {
     protected $alias = '';
     
     /**
-     * @OneToOne(targetEntity="Tinycms\Bundle\CoreBundle\models\Content", cascade="persist")
+     * @OneToOne(targetEntity="TinyCms\Bundle\CoreBundle\models\Content", cascade="persist")
      * @JoinColumn(name="content_id", referencedColumnName="id")     
      * 
      */
     protected $content;
 
     /**
-     * @OneToOne(targetEntity="Tinycms\Bundle\CoreBundle\models\Content", cascade="persist")
+     * @OneToOne(targetEntity="TinyCms\Bundle\CoreBundle\models\Content", cascade="persist")
      * @JoinColumn(name="teaser_id", referencedColumnName="id")     
      * 
      */
     protected $teaser;
 
     /**
-     * @OneToOne(targetEntity="Tinycms\Bundle\CoreBundle\models\Content", cascade="persist")
+     * @OneToOne(targetEntity="TinyCms\Bundle\CoreBundle\models\Content", cascade="persist")
      * @JoinColumn(name="image_id", referencedColumnName="id")     
      * 
      */

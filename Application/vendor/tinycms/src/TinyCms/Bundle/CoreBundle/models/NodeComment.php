@@ -1,5 +1,5 @@
 <?php
-namespace Tinycms\Bundle\CoreBundle\models;
+namespace TinyCms\Bundle\CoreBundle\models;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -26,7 +26,7 @@ class NodeComment {
     protected $containerType;
     
     /**
-     * @OneToMany(targetEntity="Tinycms\Bundle\CoreBundle\models\Comment", mappedBy="node", cascade={"persist"})
+     * @OneToMany(targetEntity="TinyCms\Bundle\CoreBundle\models\Comment", mappedBy="node", cascade={"persist"})
      * 
      */
     protected $comments;

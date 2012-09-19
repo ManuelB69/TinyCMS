@@ -1,8 +1,8 @@
 <?php
 
-namespace Tinycms\Bundle\BlogBundle;
+namespace TinyCms\Bundle\BlogBundle;
 
-class BlogBundle extends \Tinycms\Bundle\CoreBundle\library\Bundle {
+class BlogBundle extends \TinyCms\Bundle\CoreBundle\library\Bundle {
     
     const BUNDLE_NAME = "TinyCmsBlogBundle";
     

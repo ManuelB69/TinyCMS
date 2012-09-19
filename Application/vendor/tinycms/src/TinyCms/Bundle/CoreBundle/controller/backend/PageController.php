@@ -1,11 +1,11 @@
 <?php
 
-namespace Tinycms\Bundle\CoreBundle\controller\backend;
+namespace TinyCms\Bundle\CoreBundle\controller\backend;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class PageController extends \Tinycms\Bundle\CoreBundle\library\Backend
+class PageController extends \TinyCms\Bundle\CoreBundle\library\Backend
 {
     public function indexAction()
     {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Tinycms\Bundle\CoreBundle\widgets;
+namespace TinyCms\Bundle\CoreBundle\widgets;
 
-class FormTextField extends \Tinycms\Bundle\CoreBundle\library\FormWidget {
+class FormTextField extends \TinyCms\Bundle\CoreBundle\library\FormWidget {
     
     public function generate()
     {

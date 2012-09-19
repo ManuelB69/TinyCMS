@@ -1,8 +1,8 @@
 <?php
 
-namespace Tinycms\Bundle\CoreBundle\library;
+namespace TinyCms\Bundle\CoreBundle\library;
 
-use \Tinycms\Bundle\CoreBundle\models\Content;
+use \TinyCms\Bundle\CoreBundle\models\Content;
 
 class ContentElement extends Panel {
 

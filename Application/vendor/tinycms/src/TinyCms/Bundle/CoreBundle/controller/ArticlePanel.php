@@ -1,10 +1,10 @@
 <?php
 
-namespace Tinycms\Bundle\CoreBundle\controller;
+namespace TinyCms\Bundle\CoreBundle\controller;
 
-use Tinycms\Bundle\CoreBundle\library\Panel;
-use Tinycms\Bundle\CoreBundle\models;
-use Tinycms\Bundle\CoreBundle\models\Article;
+use TinyCms\Bundle\CoreBundle\library\Panel;
+use TinyCms\Bundle\CoreBundle\models;
+use TinyCms\Bundle\CoreBundle\models\Article;
 
 abstract class ArticlePanel extends Panel {
 

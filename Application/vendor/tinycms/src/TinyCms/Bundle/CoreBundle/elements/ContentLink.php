@@ -1,11 +1,11 @@
 <?php
 
-namespace Tinycms\Bundle\CoreBundle\elements;
+namespace TinyCms\Bundle\CoreBundle\elements;
 
 use \library\Kernel;
-use \Tinycms\Bundle\CoreBundle\models\Content;
+use \TinyCms\Bundle\CoreBundle\models\Content;
 
-class ContentLink extends \Tinycms\Bundle\CoreBundle\library\ContentElement {
+class ContentLink extends \TinyCms\Bundle\CoreBundle\library\ContentElement {
 
     public function generate()
     {

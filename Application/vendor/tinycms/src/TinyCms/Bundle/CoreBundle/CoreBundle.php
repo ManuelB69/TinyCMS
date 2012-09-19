@@ -1,6 +1,6 @@
 <?php
 
-namespace Tinycms\Bundle\CoreBundle;
+namespace TinyCms\Bundle\CoreBundle;
 
 class CoreBundle extends library\Bundle {
     

@@ -1,12 +1,12 @@
 <?php
-namespace Tinycms\Bundle\CoreBundle\models;
+namespace TinyCms\Bundle\CoreBundle\models;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @Entity(repositoryClass="Tinycms\Bundle\CoreBundle\models\PageRepository")
+ * @Entity(repositoryClass="TinyCms\Bundle\CoreBundle\models\PageRepository")
  * @Table(name="tcm_pages", 
  *        indexes={@index(name="IDX_ALIAS", columns={"alias"})})
  */
@@ -66,7 +66,7 @@ class Page {
     protected $description;
     
     /**
-     * @OneToOne(targetEntity="Tinycms\Bundle\CoreBundle\models\NodeArticle", cascade="persist")
+     * @OneToOne(targetEntity="TinyCms\Bundle\CoreBundle\models\NodeArticle", cascade="persist")
      * @JoinColumn(name="node_article_id", referencedColumnName="id")     
      * 
      */

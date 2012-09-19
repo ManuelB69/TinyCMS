@@ -1,5 +1,5 @@
 <?php
-namespace Tinycms\Bundle\CoreBundle\models;
+namespace TinyCms\Bundle\CoreBundle\models;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -19,21 +19,21 @@ class Taxonomy {
     protected $id;
 	
     /**
-     * @ManyToOne(targetEntity="Tinycms\Bundle\CoreBundle\models\Taxonomy", inversedBy="children")
+     * @ManyToOne(targetEntity="TinyCms\Bundle\CoreBundle\models\Taxonomy", inversedBy="children")
      * @Desc: parent for <Taxonomy> trees
      * 
      */
     protected $parent;
 	
     /**
-     * @OneToMany(targetEntity="Tinycms\Bundle\CoreBundle\models\Taxonomy", mappedBy="parent")
+     * @OneToMany(targetEntity="TinyCms\Bundle\CoreBundle\models\Taxonomy", mappedBy="parent")
      * @Desc: children for <Taxonomy> trees
      *   
      */
     protected $children;    
     
     /**
-     * @OneToMany(targetEntity="Tinycms\Bundle\CoreBundle\models\TaxonomyItem", mappedBy="taxonomy")
+     * @OneToMany(targetEntity="TinyCms\Bundle\CoreBundle\models\TaxonomyItem", mappedBy="taxonomy")
      *   
      */
     protected $items;
